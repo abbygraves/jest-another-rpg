@@ -1,6 +1,14 @@
+// ⬇︎ IMPORTS/VARIABLES ⬇︎
+// ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
 const Potion = require("../lib/Potion.js");
 
-// POTION TEST
+// ————————————————————————————————————————————————————————————————————————————————————————
+
+
+// ⬇︎ TESTS ⬇︎
+// ▬▬▬▬▬▬▬▬▬▬▬
+
 test("creates a health potion object", () => {
   const potion = new Potion("health");
 
