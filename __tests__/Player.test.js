@@ -29,7 +29,7 @@ test('creates a player object', () => {
 });
 
 
-// GETSTATS() TEST
+// getStats() TEST —— TEST TO CHECK/PRINT PLAYER'S STATS AS AN OBJECT CONTAINING THE PLAYER'S PROPERTIES
 test("gets player's stats as an object", () => {
   const player = new Player('Dave');
 
@@ -40,7 +40,7 @@ test("gets player's stats as an object", () => {
 });
 
 
-// GETINVENTORY() TEST
+// getInventory() TEST —— TEST TO CHECK/RETURN AN ARRAY OF POTION OBJECTS OR REUTRN FALSE IF INVENTORY IS EMPTY
 test('gets inventory from player or returns false', () => {
   const player = new Player('Dave');
 
@@ -52,7 +52,7 @@ test('gets inventory from player or returns false', () => {
 });
 
 
-// GETHEATH() TEST —— TEST TO GET INFO ABOUT THE PLAYER'S HEALTH
+// getHealth() TEST —— TEST TO GET INFO ABOUT THE PLAYER'S HEALTH
 test("gets player's health value", () => {
   const player = new Player('Dave');
 
@@ -60,7 +60,7 @@ test("gets player's health value", () => {
 });
 
 
-// ISALIVE() TEST —— TEST TO CHECK IF THE PLAYER IS ALIVE
+// isAlive() TEST —— TEST TO CHECK IF THE PLAYER IS ALIVE
 test('checks if player is alive or not', () => {
   const player = new Player('Dave');
 
@@ -72,7 +72,7 @@ test('checks if player is alive or not', () => {
 });
 
 
-// REDUCEHEALTH() TEST —— TEST TO CHECK IF CORRECT AMOUNT OF HEALTH IS BEING SUBTRACTED FROM THE PLAYER HEALTH PROPERTY
+// reduceHealth() TEST —— TEST TO CHECK IF CORRECT AMOUNT OF HEALTH IS BEING SUBTRACTED FROM THE PLAYER HEALTH PROPERTY
 test("subtracts from player's health", () => {
   const player = new Player('Dave');
   const oldHealth = player.health;
@@ -84,4 +84,37 @@ test("subtracts from player's health", () => {
   player.reduceHealth(99999);
 
   expect(player.health).toBe(0);
+});
+
+
+// getAttackValue() TEST —— TEST TO VERIFY A PLAYER'S ATTACK VALUE IS WITHIN RANGE
+test("gets player's attack value", () => {
+  const player = new Player('Dave');
+  player.strength = 10;
+
+  expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
+  expect(player.getAttackValue()).toBeLessThanOrEqual(15);
+});
+
+
+// addPotion() TEST —— TEST TO CHECK THAT A POTION WAS CORRECTLY ADDED TO THE INVENTORY
+test("adds a potion to the inventory", () => {
+  const player = new Player("Dave");
+  const oldCount = player.inventory.length;
+
+  player.addPotion(new Potion());
+
+  expect(player.inventory.length).toBeGreaterThan(oldCount);
+});
+
+
+// usePotion() TEST —— TEST TO ENSURE THAT usePotion() REMOVES THE CORRECT POTION FROM THE PLAYER INVENTORY
+test('uses a potion from inventory', () => {
+  const player = new Player('Dave');
+  player.inventory = [new Potion(), new Potion(), new Potion()];
+  const oldCount = player.inventory.length;
+
+  player.usePotion(1);
+
+  expect(player.inventory.length).toBeLessThan(oldCount);
 });
