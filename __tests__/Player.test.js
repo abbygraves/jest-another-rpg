@@ -29,7 +29,7 @@ test('creates a player object', () => {
 });
 
 
-// getStats() TEST
+// GETSTATS() TEST
 test("gets player's stats as an object", () => {
   const player = new Player('Dave');
 
@@ -40,7 +40,7 @@ test("gets player's stats as an object", () => {
 });
 
 
-// getInventory() TEST
+// GETINVENTORY() TEST
 test('gets inventory from player or returns false', () => {
   const player = new Player('Dave');
 
@@ -49,4 +49,39 @@ test('gets inventory from player or returns false', () => {
   player.inventory = [];
 
   expect(player.getInventory()).toEqual(false);
+});
+
+
+// GETHEATH() TEST —— TEST TO GET INFO ABOUT THE PLAYER'S HEALTH
+test("gets player's health value", () => {
+  const player = new Player('Dave');
+
+  expect(player.getHealth()).toEqual(expect.stringContaining(player.health.toString()));
+});
+
+
+// ISALIVE() TEST —— TEST TO CHECK IF THE PLAYER IS ALIVE
+test('checks if player is alive or not', () => {
+  const player = new Player('Dave');
+
+  expect(player.isAlive()).toBeTruthy();
+
+  player.health = 0;
+
+  expect(player.isAlive()).toBeFalsy();
+});
+
+
+// REDUCEHEALTH() TEST —— TEST TO CHECK IF CORRECT AMOUNT OF HEALTH IS BEING SUBTRACTED FROM THE PLAYER HEALTH PROPERTY
+test("subtracts from player's health", () => {
+  const player = new Player('Dave');
+  const oldHealth = player.health;
+
+  player.reduceHealth(5);
+
+  expect(player.health).toBe(oldHealth - 5);
+
+  player.reduceHealth(99999);
+
+  expect(player.health).toBe(0);
 });
